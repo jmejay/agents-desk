@@ -1,0 +1,26 @@
+# Codex: append to ~/.codex/config.toml, then run /hooks in Codex once to review and trust them.
+# Codex allows SessionEnd hooks 3 seconds, so every timeout here is 3.
+
+[[hooks.SessionStart]]
+[[hooks.SessionStart.hooks]]
+type = "command"
+command = "python3 ~/.desk/desk.py hook codex"
+timeout = 3
+
+[[hooks.UserPromptSubmit]]
+[[hooks.UserPromptSubmit.hooks]]
+type = "command"
+command = "python3 ~/.desk/desk.py hook codex"
+timeout = 3
+
+[[hooks.Stop]]
+[[hooks.Stop.hooks]]
+type = "command"
+command = "python3 ~/.desk/desk.py hook codex"
+timeout = 3
+
+[[hooks.SessionEnd]]
+[[hooks.SessionEnd.hooks]]
+type = "command"
+command = "python3 ~/.desk/desk.py hook codex"
+timeout = 3
