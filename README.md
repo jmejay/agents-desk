@@ -6,7 +6,7 @@ Every Claude Code or Codex session goes on the desk and stays there until you cl
 
 - **Start working.** Use `claude` or `codex` like you normally do. Every session is added to your desk for you.
 - **Check your desk.** Your status line tells you how many sessions are waiting for an answer. Type `desk` to see the full list.
-- **Go back to a session.** Each one on the list has a line you can copy and paste to open it again.
+- **Go back to a session.** Every session on the list shows its resume command, like `cd ~/code/myapp && claude -r <session-id>`. Paste it into a terminal to carry on where you left off.
 - **Answer from anywhere.** In any session, ask "what's on my desk?" and reply to the waiting questions there.
 - **Finish.** Tell the session you're done, and it takes itself off the desk.
 - **Change your mind.** Talk to a finished session again and it comes back.
