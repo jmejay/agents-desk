@@ -12,7 +12,17 @@ Every Claude Code or Codex session goes on the desk and stays there until you cl
 - **Live**: the session hasn't ended (for Claude, still open in a terminal).
 - **Exited**: closed the terminal, work not marked done.
 
-Oldest first, because those are the ones slipping.
+Oldest first, because those are the ones slipping. An entry looks like this:
+
+```
+## Needs you: ended on a question (3)
+
+- **Login refactor** `3f2a91c0` claude · ~/code/myapp @ feat/login · 2h ago · found by sweep
+  > The tests pass. Shall I open the PR?
+  `cd ~/code/myapp && claude -r 3f2a91c0-5b7e-4d21-9c3a-8e1f6b2d4a77`
+```
+
+Title, short id, agent, where it ran (directory @ branch), when it last did anything, the last paragraph of its last reply, and the line to resume it. "found by sweep" means the hooks missed the session and `desk sweep` added it later.
 
 **3. Pick one up.** Each entry ends with a resume line for its agent. Paste it:
 
@@ -21,13 +31,15 @@ cd ~/code/myapp && claude -r <session-id>
 cd ~/code/myapp && codex resume <session-id>
 ```
 
-**4. Finish.** Say "desk close" in the session. From another terminal: `desk close <id>`.
+**4. Triage without resuming.** In any session, run `desk show` or ask "what's on my desk?" (the agent can read `~/.desk/desk.md`). You can answer several waiting questions from one place and only resume the sessions that need their own context.
 
-**5. Changed your mind.** Prompt a closed session again and it comes back on its own. Or `desk reopen <id>`.
+**5. Finish.** Tell the session the work is done. Each session is told its desk id at start and to run `desk close <id> "<one-line outcome>"` when you say so. From another terminal: `desk close <id> "outcome"`. The outcome is kept in `sessions.jsonl` with the close.
 
-**6. Throw one away.** `desk rm <id>` drops it for good; resuming won't bring it back (only `desk reopen` will).
+**6. Changed your mind.** Prompt a closed session again and it comes back on its own. Or `desk reopen <id>`.
 
-**7. Tidy up.** `desk sweep` closes exited sessions whose branch PR has merged, and picks up any Claude or Codex sessions the hooks missed in the last 14 days (`--days N` to change).
+**7. Throw one away.** `desk rm <id>` drops it for good; resuming won't bring it back (only `desk reopen` will).
+
+**8. Tidy up.** `desk sweep` closes exited sessions whose branch PR has merged, and picks up any Claude or Codex sessions the hooks missed in the last 14 days (`--days N` to change).
 
 Nothing ever closes because it's old.
 
@@ -36,6 +48,7 @@ Nothing ever closes because it's old.
 macOS only: bare `desk` reveals the list in Finder (`open -R`), and the lock uses `fcntl`. Needs Python 3; `gh` is optional (used by `sweep` to spot merged PRs).
 
 ```
+git clone https://github.com/jmejay/agents-desk.git && cd agents-desk
 mkdir -p ~/.desk
 ln -s "$PWD/desk.py" ~/.desk/desk.py
 ln -s "$PWD/desk.py" ~/.local/bin/desk
@@ -56,7 +69,7 @@ Claude's snippet and title come from its transcript. Codex's reply comes from th
 
 ## Known gaps
 
-- "Needs you" just means the last paragraph ends in `?`.
+- "Needs you" just means the last paragraph ends in `?`. A session waiting on you without asking ("Steps 1 and 2 wait on your yes", "Tell me which to start", "I can file this if you want") lands under Live or Exited, so skim those snippets too.
 - Sessions picked up by `sweep` show as exited.
 - Cloud sessions, `claude -p` runs, `codex exec` runs and Codex subagents stay off the desk.
 - Codex sessions found by sweep only have a snippet if their transcript file still exists (most older ones don't).
