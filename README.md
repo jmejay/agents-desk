@@ -4,18 +4,16 @@ Every Claude Code or Codex session goes on the desk and stays there until you cl
 
 ## TL;DR
 
-| You want to… | Do this |
-|---|---|
-| Track a session | Nothing. Run `claude` or `codex`; it's on the desk after the first reply. |
-| See what's waiting | Status line shows `N items on your desk`. `desk` opens the list in Finder, `desk show` prints it. |
-| Pick one up | Paste the entry's resume line: `cd <dir> && claude -r <id>` (or `codex resume <id>`). |
-| Triage from where you are | In any session: `desk show`, or ask "what's on my desk?" |
-| Finish | Tell the session it's done. Elsewhere: `desk close <id> "outcome"`. |
-| Undo a close | Prompt the session again, or `desk reopen <id>`. |
-| Drop one for good | `desk rm <id>` |
-| Tidy up | `desk sweep`: closes sessions whose PR merged, adds ones the hooks missed. |
+- **Start working.** Use `claude` or `codex` like you normally do. Every session is added to your desk for you.
+- **Check your desk.** Your status line tells you how many sessions are waiting for an answer. Type `desk` to see the full list.
+- **Go back to a session.** Each one on the list has a line you can copy and paste to open it again.
+- **Answer from anywhere.** In any session, ask "what's on my desk?" and reply to the waiting questions there.
+- **Finish.** Tell the session you're done, and it takes itself off the desk.
+- **Change your mind.** Talk to a finished session again and it comes back.
+- **Throw one away.** Type `desk rm` and the session's id.
+- **Clean up.** Type `desk sweep`. It removes sessions whose work has been merged and adds any it missed.
 
-Nothing closes because it's old. Details for each below.
+Nothing is ever removed just because it's old. More detail on each step below.
 
 ## Journeys
 
