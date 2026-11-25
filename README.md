@@ -2,6 +2,21 @@
 
 Every Claude Code or Codex session goes on the desk and stays there until you close it, so none slip through when many run at once. Both agents share one desk; each entry says which agent it belongs to and gives that agent's resume command.
 
+## TL;DR
+
+| You want to… | Do this |
+|---|---|
+| Track a session | Nothing. Run `claude` or `codex`; it's on the desk after the first reply. |
+| See what's waiting | Status line shows `N items on your desk`. `desk` opens the list in Finder, `desk show` prints it. |
+| Pick one up | Paste the entry's resume line: `cd <dir> && claude -r <id>` (or `codex resume <id>`). |
+| Triage from where you are | In any session: `desk show`, or ask "what's on my desk?" |
+| Finish | Tell the session it's done. Elsewhere: `desk close <id> "outcome"`. |
+| Undo a close | Prompt the session again, or `desk reopen <id>`. |
+| Drop one for good | `desk rm <id>` |
+| Tidy up | `desk sweep`: closes sessions whose PR merged, adds ones the hooks missed. |
+
+Nothing closes because it's old. Details for each below.
+
 ## Journeys
 
 **1.** Run `claude` or `codex` as usual. The session is on the desk after its first reply. Nothing to do.
